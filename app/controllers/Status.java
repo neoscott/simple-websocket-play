@@ -36,6 +36,9 @@ public class Status extends Controller {
 				}
 
 			}
+			
+			Logger.info("Disconnecting ...");
+			disconnect();
 
 		}
 

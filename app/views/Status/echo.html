@@ -1,0 +1,31 @@
+#{extends 'main.html' /}
+#{set title:'Show Status' /}
+
+
+<div>
+	<h3 id="status">-</h3><br />
+	<input type="text" id="message" value="hello world!" /> <a id="hit" href="#">send message</a><br /><br />
+	<a id="quit" href="#">Disconnect</a><br />
+</div>
+
+
+<script type="text/javascript">
+    // Create a socket
+    var socket = new WebSocket('@@{WsStatus.echo()}');
+
+	// send a message
+	$('#hit').click(function(){
+		var msg = $('#message').val();
+		socket.send(msg);
+	});
+
+	// send a message
+	$('#quit').click(function(){
+		socket.send('quit');
+	});
+
+	// receive a message
+    socket.onmessage = function(e) {
+    	$('#status').html(e.data);
+    }
+</script>

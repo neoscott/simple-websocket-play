@@ -1,0 +1,17 @@
+#{extends 'main.html' /}
+#{set title:'Show Status' /}
+
+
+<div>
+	<h3 id="status">---</h3>
+</div>
+
+
+<script type="text/javascript">
+    // Create a socket
+    var socket = new WebSocket('@@{Status.WS.get()}');
+
+    socket.onmessage = function(e) {
+    	$('#status').html(e.data);
+    }
+</script>
